@@ -51,7 +51,7 @@ class Films extends Component {
     );
 
     _onFilmTapped = film => {
-
+        Actions.FilmDetail({ film, title: film.title });
     }
 }
 

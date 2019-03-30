@@ -5,14 +5,14 @@ import styles from './styles';
 
 class FilmDetail extends Component {
     static defaultProps = {
-        data: {}
+        film: {}
     };
 
     render() {
-        const { data: { filmName } } = this.props;
+        const { film } = this.props;
         return (
             <View style={styles.container}>
-                <Text>{ filmName }</Text>
+                <Text>{ film.title }</Text>
             </View>
         );
     }
