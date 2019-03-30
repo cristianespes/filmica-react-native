@@ -12,7 +12,6 @@ class FilmDetail extends Component {
         const { data: { filmName } } = this.props;
         return (
             <View style={styles.container}>
-                <Text>Segunda página</Text>
                 <Text>{ filmName }</Text>
             </View>
         );
