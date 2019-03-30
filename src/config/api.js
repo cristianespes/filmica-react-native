@@ -1,4 +1,5 @@
 export const BASE_URL = 'https://api.themoviedb.org/3/';
+export const BASE_URL_IMAGE = 'https://image.tmdb.org/t/p/w342';
 export const API_KEY = 'e68728e1e31dcda82f7b2b896f0c47be';
 export const LANGUAGE = 'es';
 
