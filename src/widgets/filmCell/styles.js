@@ -5,7 +5,8 @@ import * as colors from '../../commons/colors';
 const styles = StyleSheet.create({
      cell: {
         width: '50%',
-        height: width / 1.4
+        height: width / 1.4,
+        padding: 4
      },
      image: {
         width: '100%',

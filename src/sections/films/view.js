@@ -22,6 +22,7 @@ class Films extends Component {
         return (
             <View style={styles.container}>
                 <FlatList 
+                    style= {styles.list}
                     //extraData={this.state}
                     data={films}
                     keyExtractor={this._keyExtractor}

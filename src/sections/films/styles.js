@@ -5,6 +5,9 @@ const styles = StyleSheet.create({
      container: {
          flex: 1,
          backgroundColor: colors.primaryColorLight
+     },
+     list: {
+         padding: 4
      }
 });
 

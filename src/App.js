@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import { StatusBar } from 'react-native';
 import { Stack, Router, Scene } from 'react-native-router-flux';
+import { Provider } from 'react-redux';
 
 import { Films, FilmDetail } from './sections';
 import { configureAxios } from './webservice';
 import * as colors from './commons/colors';
+import { store } from './config/redux';
 
 
 export default class App extends Component {
@@ -17,23 +19,26 @@ export default class App extends Component {
   }
 
   render() {
+    console.log("store: ", store.getState())
     return (
-      <Router>
-        <Stack key={'root'}>
-          <Scene
-            key={'Films'}
-            component={Films}
-            initial
-            title={"Filmica"}
-            {...navBarStyles}
-          />
-          <Scene
-            key={'FilmDetail'}
-            component={FilmDetail}
-            {...navBarStyles}
-          />
-        </Stack>
-      </Router>
+      <Provider store={ store }>
+        <Router>
+          <Stack key={'root'}>
+            <Scene
+              key={'Films'}
+              component={Films}
+              initial
+              title={"Filmica"}
+              {...navBarStyles}
+            />
+            <Scene
+              key={'FilmDetail'}
+              component={FilmDetail}
+              {...navBarStyles}
+            />
+          </Stack>
+        </Router>
+      </Provider>
     );
   }
 }
