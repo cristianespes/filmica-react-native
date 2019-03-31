@@ -15,7 +15,14 @@ function updateFetching(value) {
     }
 }
 
-export function fetchDetailFilm(filmSelected) {
+export function initFilmDetail(filmSelected) {
+    return function(dispatch, getState) {
+        dispatch(updateFilm({}));
+        dispatch(fetchDetailFilm(filmSelected));
+    };
+}
+
+function fetchDetailFilm(filmSelected) {
     return function(dispatch, getState) {
         
         if (!filmSelected) {

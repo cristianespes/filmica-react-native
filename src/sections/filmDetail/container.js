@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         getDetailFilm: () => {
             const filmSelected = props.film
-            dispatch(DetailActions.fetchDetailFilm(filmSelected));
+            dispatch(DetailActions.initFilmDetail(filmSelected));
         }
     };
 };

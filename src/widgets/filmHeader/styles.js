@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 16,
         color: 'white',
-        flex: 1
+        flex: 1,
+        fontWeight: 'bold'
     }
   });
 

@@ -13,7 +13,7 @@ class FilmHeader extends Component {
     render() {
         const { film } = this.props;
         const poster = film && film.poster_path ? { uri: `${BASE_URL_IMAGE}${film.poster_path}` } : null;
-        const backdrop = _.get(film, 'backdrop_path', null) ? { uri: `${BASE_URL_BACKDROP}${_.get(film,'backdrop_path', null)}` } : null;
+        const backdrop = _.has(film, 'backdrop_path') ? { uri: `${BASE_URL_BACKDROP}${_.get(film,'backdrop_path', null)}` } : null;
         return (
             <SafeAreaView style={styles.container}>
                 <View style = {styles.backgroundContainer}>
