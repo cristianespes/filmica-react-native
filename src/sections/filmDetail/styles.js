@@ -4,8 +4,6 @@ import * as colors from '../../commons/colors';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "grey",
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: colors.primaryColorLight
     }
 });

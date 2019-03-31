@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import styles from './styles';
+import { FilmHeader } from '../../widgets';
 
 class FilmDetail extends Component {
     static defaultProps = {
@@ -11,15 +12,25 @@ class FilmDetail extends Component {
     constructor(props) {
         super(props);
 
-        this.props.getDetailFilm();
+        props.getDetailFilm();
     }
 
     render() {
-        console.log('detail this.props: ', this.props);
         const { film } = this.props;
+        
+        return (
+            <ScrollView style={styles.container}>
+                <FilmHeader film={film} />
+                <Text>{ 'Sinópsis:' }</Text>
+                <Text>{ film.overview }</Text>
+                <Text>{ 'Estreno:' }</Text>
+                <Text>{ film.release_date }</Text>
+            </ScrollView>
+        );
+
         return (
             <View style={styles.container}>
-                <Text>{ film.title }</Text>
+                <FilmHeader film={film} />
                 <Text>{ film.overview }</Text>
                 <Text>{ film.release_date }</Text>
             </View>
