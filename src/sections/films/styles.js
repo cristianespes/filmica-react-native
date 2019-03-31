@@ -8,6 +8,12 @@ const styles = StyleSheet.create({
      },
      list: {
          padding: 4
+     },
+     NoResults: {
+         color: colors.white,
+         fontSize: 16,
+         margin: 20,
+         textAlign: 'center'
      }
 });
 

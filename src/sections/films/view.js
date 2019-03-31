@@ -1,47 +1,45 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, SafeAreaView, ActivityIndicator, RefreshControl } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import styles from './styles';
-import * as api from '../../webservice';
 import { FilmCell } from '../../widgets';
+import * as colors from '../../commons/colors';
 
 class Films extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = { films: [] };
-
-        this._fetchFilmsList();
+        this.props.getFilmsList();
     }
 
     render() {
-        console.log("this.state.films: ", this.state.films);
-        const { films } = this.state;
+        console.log("this.props: ", this.props);
+        const { list, isFetching } = this.props;
+        console.log("isFetching: ", isFetching);
         return (
             <View style={styles.container}>
                 <FlatList 
                     style= {styles.list}
                     //extraData={this.state}
-                    data={films}
+                    data={list}
                     keyExtractor={this._keyExtractor}
                     renderItem={this._renderItem}
                     numColumns={2}
+                    ListFooterComponent={ _ => this._renderFooter(isFetching) }
+                    ListEmptyComponent={ _ => this._renderNoResults(isFetching) }
+                    refreshControl={
+                        <RefreshControl
+                            onRefresh={this.props.getFilmsList}
+                            refreshing={isFetching}
+                            tintColor={colors.accentColor}
+                            colors={[colors.accentColor]}
+                        />
+                    }
                 />
             </View>
         );
-    }
-
-    _fetchFilmsList() {
-        api.fetchDiscoverFilms()
-        .then( res => {
-            this.setState({ films: res.data.results });
-        })
-        .catch( err => {
-            console.log("fetchDiscoverFilms err: ", err);
-            this.setState({ err: err });
-        });
     }
 
     _keyExtractor = (item, index) => `${item.id}`;
@@ -53,6 +51,22 @@ class Films extends Component {
 
     _onFilmTapped = film => {
         Actions.FilmDetail({ film, title: film.title });
+    }
+
+    _renderFooter = (isFetching) => {
+        if (!isFetching) {
+            return null;
+        }
+
+        return <ActivityIndicator
+                    color={colors.accentColor}
+                    size='large'
+                    style={{margin: 20}}
+                />;
+    }
+
+    _renderNoResults = isFetching => {
+        return isFetching ? null : <Text style={styles.NoResults}>{'No hay películas disponibles'}</Text> 
     }
 }
 
