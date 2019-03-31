@@ -4,7 +4,8 @@ const initialState = {
     discoverList: [],
     isFetching: false,
     page: 1,
-    totalPages: 0
+    totalPages: 0,
+    selected: null
 }
 
 export default function reducer(state = initialState, action = {}) {
@@ -21,6 +22,12 @@ export default function reducer(state = initialState, action = {}) {
             return {
                 ...state,
                 isFetching: action.value
+            }
+
+        case types.DISCOVER_UPDATE_SELECTED:
+            return {
+                ...state,
+                selected: action.value
             }
 
         default:

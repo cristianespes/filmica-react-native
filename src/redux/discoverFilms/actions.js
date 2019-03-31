@@ -9,6 +9,14 @@ function updateFilmsList(list, totalPages) {
     }
 }
 
+export function updateFilmSelected(value) {
+    // ACCION PURA
+    return {
+        type: types.DISCOVER_UPDATE_SELECTED,
+        value
+    };
+}
+
 function updateFetching(value) {
     return {
         type: types.DISCOVER_UPDATE_FETCHING,
@@ -17,6 +25,7 @@ function updateFetching(value) {
 }
 
 export function fetchFilmsList() {
+    // ACCION CON THUNK
     return (dispatch, getState) => {
         //const list = [...getState(), 1, 2, 3] // Concatenación de elementos
 

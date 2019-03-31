@@ -5,8 +5,7 @@ export const API_KEY = 'e68728e1e31dcda82f7b2b896f0c47be';
 export const LANGUAGE = 'es';
 
 export const DISCOVER_URL = 'discover/movie';
-
-export const SEARCH_ID = 'https://api.themoviedb.org/3/movie/movie_id?api_key=e68728e1e31dcda82f7b2b896f0c47be';
+export const SEARCH_ID_URL = 'movie';
 
 /*
 const USERS_URL = 'https://randomuser.me/api?seed=abc&results=100';

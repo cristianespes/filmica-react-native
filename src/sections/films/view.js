@@ -44,11 +44,11 @@ class Films extends Component {
     _keyExtractor = (item, index) => `${item.id}`;
 
     _renderItem = ({ item, index }) => (
-        // onPress={this._onFilmTapped}
         <FilmCell film={item} onPress={film => this._onFilmTapped(film)} />
     );
 
     _onFilmTapped = film => {
+        this.props.updateFilmSelected(film)
         Actions.FilmDetail({ film, title: film.title });
     }
 

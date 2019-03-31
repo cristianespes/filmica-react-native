@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { StatusBar } from 'react-native';
-import { Stack, Router, Scene } from 'react-native-router-flux';
+import { Stack, Router, Scene, Actions } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 
-import { Films, FilmDetail } from './sections';
+import { Films, FilmDetail, FilmAdd } from './sections';
 import { configureAxios } from './webservice';
 import * as colors from './commons/colors';
 import { store } from './config/redux';
@@ -29,11 +29,20 @@ export default class App extends Component {
               component={Films}
               initial
               title={"Filmica"}
+              rightTitle={'Añadir'}
+              onRight={ _ => Actions.FilmAdd() }
+              rightButtonTextStyle={{ color: colors.white }}
               {...navBarStyles}
             />
             <Scene
               key={'FilmDetail'}
               component={FilmDetail}
+              {...navBarStyles}
+            />
+            <Scene
+              key={'FilmAdd'}
+              component={FilmAdd}
+              title={'Añadir película'}
               {...navBarStyles}
             />
           </Stack>
