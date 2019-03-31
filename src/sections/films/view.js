@@ -17,7 +17,6 @@ class Films extends Component {
     render() {
         console.log("this.props: ", this.props);
         const { list, isFetching } = this.props;
-        console.log("isFetching: ", isFetching);
         return (
             <View style={styles.container}>
                 <FlatList 

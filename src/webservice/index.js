@@ -14,3 +14,9 @@ export function fetchDiscoverFilms() {
     return axios.get(url);
 }
 
+export function fetchDetailFilm(id) {
+    const url = `movie/${id}?api_key=e68728e1e31dcda82f7b2b896f0c47be`;
+
+    return axios.get(url);
+}
+
