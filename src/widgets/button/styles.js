@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 20,
         justifyContent: "center",
+        alignItems: 'center',
         backgroundColor: colors.primaryColor
      },
      label: {

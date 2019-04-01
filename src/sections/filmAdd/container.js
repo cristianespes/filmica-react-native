@@ -4,7 +4,7 @@ import * as DiscoverActions from '../../redux/discoverFilms/actions';
 
 const mapStateToProps = state => {
     return {
-      
+      isFetching: state.discoverFilms.isFetching
     };
   };
   

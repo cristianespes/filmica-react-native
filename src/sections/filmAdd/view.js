@@ -61,6 +61,7 @@ class FilmAdd extends Component {
                     label={'Añadir'}
                     onPress={this._onSubmit}
                     buttonStyle={{ margin: 20 }}
+                    isFetching={this.props.isFetching}
                 />
             </SafeAreaView>
         );
@@ -94,7 +95,6 @@ class FilmAdd extends Component {
             poster_path: "/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg"
         }
 
-        console.log('Se crea la película: ', film)
         this.props.addFilm(film);
     }
 }
