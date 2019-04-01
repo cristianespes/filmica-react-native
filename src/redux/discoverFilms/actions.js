@@ -58,11 +58,9 @@ export function addFilm(film) {
         }
 
         const list = [film, ...getState().discoverFilms.discoverList];
+        const totalPages = getState().discoverFilms.totalPages;
 
-        console.log("list: ", list)
-
-        // TODO: PENDIENTE DE RESOLVER
-        //dispatch(updateFilmsList(list, ...getState().discoverFilms.totalPages));
+        dispatch(updateFilmsList(list, totalPages));
 
         Actions.pop();
 

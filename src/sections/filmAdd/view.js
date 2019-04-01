@@ -84,6 +84,7 @@ class FilmAdd extends Component {
         this.setState({ titleError: '', overviewError: '', releaseError: '' });
 
         const film = {
+            id: 123456789,
             title,
             overview,
             release_date: release/*,
