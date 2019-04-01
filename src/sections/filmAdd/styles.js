@@ -5,5 +5,9 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.primaryColorLight
+    },
+    label: {
+        marginBottom: 10,
+        color: colors.white
     }
 });

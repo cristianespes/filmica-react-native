@@ -1,6 +1,9 @@
 import * as types from './types';
 import * as api from '../../webservice';
 
+import { Actions } from 'react-native-router-flux';
+import { Alert } from "react-native";
+
 function updateFilmsList(list, totalPages) {
     return {
         type: types.DISCOVER_UPDATE_LIST,
@@ -47,3 +50,22 @@ export function fetchFilmsList() {
             });
     };
 };
+
+export function addFilm(film) {
+    return function (dispatch, getState) {
+        if (!film) {
+            return
+        }
+
+        const list = [film, ...getState().discoverFilms.discoverList];
+
+        console.log("list: ", list)
+
+        // TODO: PENDIENTE DE RESOLVER
+        //dispatch(updateFilmsList(list, ...getState().discoverFilms.totalPages));
+
+        Actions.pop();
+
+        Alert.alert('Añadida', 'Tu película se ha añadido a la colección');
+    }
+}

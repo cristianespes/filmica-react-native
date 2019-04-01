@@ -7,3 +7,4 @@ export const error = 'red';
 
 export const black = 'black';
 export const white = 'white';
+export const gray = 'gray';

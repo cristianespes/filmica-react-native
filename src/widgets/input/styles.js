@@ -8,12 +8,12 @@ const styles = StyleSheet.create({
     },
     label: {
         color: colors.white,
-        fontSize: 14
+        fontSize: 14,
+        marginBottom: 8,
     },
     input: {
         color: colors.white,
         fontSize: 14,
-        marginTop: 8,
         borderWidth: 1,
         borderRadius: 4,
         borderColor: colors.white,

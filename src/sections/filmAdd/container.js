@@ -10,7 +10,9 @@ const mapStateToProps = state => {
   
   const mapDispatchToProps = (dispatch, props) => {
     return {
-      
+      addFilm: film => {
+        dispatch(DiscoverActions.addFilm(film))
+      }
     };
   };
   

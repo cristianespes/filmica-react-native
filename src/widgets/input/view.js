@@ -4,7 +4,8 @@ import styles from './styles';
 
 class Input extends Component {
     render() {
-        const { label,
+        const {
+            label,
             value,
             error,
             onChangeText,
@@ -19,7 +20,7 @@ class Input extends Component {
         } = this.props;
         return (
             <View style={[styles.container, containerStyle]}>
-                <Text style={[styles.label, labelStyle]}>{ label }</Text>
+                { label ? <Text style={[styles.label, labelStyle]}>{ label }</Text> : null }
                 <TextInput
                     style={[styles.input, inputStyle]}
                     onChangeText={ onChangeText }
