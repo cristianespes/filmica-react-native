@@ -16,7 +16,7 @@ class Films extends Component {
 
     render() {
         console.log("this.props: ", this.props);
-        const { list, isFetching } = this.props;
+        const { list, isFetching, page } = this.props;
         return (
             <View style={styles.container}>
                 <FlatList 
@@ -71,9 +71,7 @@ class Films extends Component {
     }
 
     _onEndReached = ({ distanceFromEnd }) => {
-        console.log("distanceFromEnd: ", distanceFromEnd)
         const {list, isFetching, page, total} = this.props;
-        console.log("list.lenght: ", list.length)
         if (list.length && !isFetching && page < total) {
             this.props.updateFilmsListOffset()
         }

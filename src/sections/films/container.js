@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
         getFilmsList: () => {
-            dispatch(DiscoverActions.fetchFilmsList());
+            dispatch(DiscoverActions.initFilmsList());
         },
         updateFilmSelected: film => {
             dispatch(DiscoverActions.updateFilmSelected(film));

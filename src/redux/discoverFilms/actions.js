@@ -20,6 +20,15 @@ export function updateFilmSelected(value) {
     };
 }
 
+export function initFilmsList() {
+    return function(dispatch, getState) {
+      dispatch(updateFilmsList([], 1));
+      const initialPage = 1;
+      dispatch(updateOffset(initialPage));
+      dispatch(fetchFilmsList());
+    };
+}
+
 function updateFetching(value) {
     return {
         type: types.DISCOVER_UPDATE_FETCHING,
@@ -43,7 +52,7 @@ export function updateFilmsListOffset() {
 }
 
 
-export function fetchFilmsList() {
+function fetchFilmsList() {
     // ACCION CON THUNK
     return (dispatch, getState) => {
 
