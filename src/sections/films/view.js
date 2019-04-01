@@ -36,6 +36,8 @@ class Films extends Component {
                             colors={[colors.accentColor]}
                         />
                     }
+                    onEndReachedThreshold={0.9}
+                    onEndReached={this._onEndReached}
                 />
             </View>
         );
@@ -66,6 +68,15 @@ class Films extends Component {
 
     _renderNoResults = isFetching => {
         return isFetching ? null : <Text style={styles.NoResults}>{'No hay películas disponibles'}</Text> 
+    }
+
+    _onEndReached = ({ distanceFromEnd }) => {
+        console.log("distanceFromEnd: ", distanceFromEnd)
+        const {list, isFetching, page, total} = this.props;
+        console.log("list.lenght: ", list.length)
+        if (list.length && !isFetching && page < total) {
+            this.props.updateFilmsListOffset()
+        }
     }
 }
 

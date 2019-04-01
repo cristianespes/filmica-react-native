@@ -18,6 +18,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         updateFilmSelected: film => {
             dispatch(DiscoverActions.updateFilmSelected(film));
+        },
+        updateFilmsListOffset: () => {
+            dispatch(DiscoverActions.updateFilmsListOffset());
         }
     };
 };

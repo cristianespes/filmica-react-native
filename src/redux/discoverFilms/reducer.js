@@ -29,6 +29,13 @@ export default function reducer(state = initialState, action = {}) {
                 ...state,
                 selected: action.value
             }
+        
+        case types.DISCOVER_UPDATE_PAGINATION:
+            return {
+                ...state,
+                page: action.value
+            }
+
 
         default:
             return state

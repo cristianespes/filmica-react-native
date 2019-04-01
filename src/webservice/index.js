@@ -7,8 +7,8 @@ export function configureAxios() {
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 }
 
-export function fetchDiscoverFilms() {
-    const url = `${DISCOVER_URL}?api_key=${API_KEY}&language=${LANGUAGE}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
+export function fetchDiscoverFilms(page) {
+    const url = `${DISCOVER_URL}?api_key=${API_KEY}&language=${LANGUAGE}&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`;
 
     return axios.get(url);
 }

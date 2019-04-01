@@ -27,17 +27,35 @@ function updateFetching(value) {
     }
 }
 
+function updateOffset(value) {
+    return {
+        type: types.DISCOVER_UPDATE_PAGINATION,
+        value
+    }
+}
+
+export function updateFilmsListOffset() {
+    return function(dispatch, getState) {
+        const newPage = getState().discoverFilms.page + 1;
+        dispatch(updateOffset(newPage));
+        dispatch(fetchFilmsList(newPage));
+    }
+}
+
+
 export function fetchFilmsList() {
     // ACCION CON THUNK
     return (dispatch, getState) => {
-        //const list = [...getState(), 1, 2, 3] // Concatenación de elementos
+
+        const page = getState().discoverFilms.page;
 
         dispatch(updateFetching(true));
 
         api
-            .fetchDiscoverFilms()
+            .fetchDiscoverFilms(page)
             .then( res => {
-                const list = res.data.results;
+                //const list = res.data.results;
+                const list = [...getState().discoverFilms.discoverList, ...res.data.results];
                 const totalPages = res.data.total_pages;
                 dispatch(updateFilmsList(list, totalPages))
             })
