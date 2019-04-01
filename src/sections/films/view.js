@@ -26,7 +26,7 @@ class Films extends Component {
                     keyExtractor={this._keyExtractor}
                     renderItem={this._renderItem}
                     numColumns={2}
-                    ListFooterComponent={ _ => this._renderFooter(isFetching) }
+                    ListFooterComponent={ this._renderFooter }
                     ListEmptyComponent={ _ => this._renderNoResults(isFetching) }
                     refreshControl={
                         <RefreshControl
@@ -54,8 +54,10 @@ class Films extends Component {
         Actions.FilmDetail({ film, title: film.title });
     }
 
-    _renderFooter = (isFetching) => {
-        if (!isFetching) {
+    _renderFooter = () => {
+        const {isFetching, page} = this.props;
+
+        if (!isFetching || page == 1) {
             return null;
         }
 
