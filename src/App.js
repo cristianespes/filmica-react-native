@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import { StatusBar } from 'react-native';
-import { Stack, Router, Scene, Actions } from 'react-native-router-flux';
+import { Stack, Router, Scene, Actions, Tabs } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 
 import { Films, FilmDetail, FilmAdd } from './sections';
 import { configureAxios } from './webservice';
 import * as colors from './commons/colors';
 import { store } from './config/redux';
+import { TabIcon } from './widgets'
 
 
 export default class App extends Component {
@@ -24,10 +25,53 @@ export default class App extends Component {
       <Provider store={ store }>
         <Router>
           <Stack key={'root'}>
+            <Tabs
+              key='TabBar'
+              inactiveBackgroundColor="#FFF"
+              activeBackgroundColor="#DDD"
+              showLabel={false}
+              hideNavBar
+              tabBarStyle={tabBarStyle}
+              {...navBarStyles}
+              initial
+            >
+              <Stack 
+                key="tab_discover"
+                title="Discover"
+                tabBarLabel="Catálogo"
+                icon={TabIcon}
+                titleStyle={{ color: 'white', alignSelf: 'center' }}
+              >
+                <Scene
+                  key={'Films'}
+                  component={Films}
+                  title={"Filmica"}
+                  rightTitle={'Añadir'}
+                  onRight={ _ => Actions.FilmAdd() }
+                  rightButtonTextStyle={{ color: colors.white }}
+                  {...navBarStyles}
+                />
+              </Stack>
+
+              <Stack 
+                key="tab_favorites"
+                title="Favorites"
+                tabBarLabel="Favoritos"
+                icon={TabIcon}
+                titleStyle={{ color: 'white', alignSelf: 'center' }}
+              >
+                <Scene
+                  key={'FilmAdd'}
+                  component={FilmAdd}
+                  title={'Añadir película'}
+                  {...navBarStyles}
+                />
+              </Stack>
+            </Tabs>
             <Scene
               key={'Films'}
               component={Films}
-              initial
+              //initial
               title={"Filmica"}
               rightTitle={'Añadir'}
               onRight={ _ => Actions.FilmAdd() }
@@ -57,4 +101,8 @@ navBarStyles= {
   titleStyle: { color: colors.white },
   backButtonTextStyle: { color: colors.white },
   backButtonTintColor: colors.white
+}
+
+tabBarStyle = {
+  backgroundColor: colors.primaryColor
 }

@@ -8,3 +8,4 @@ export const error = 'red';
 export const black = 'black';
 export const white = 'white';
 export const gray = 'gray';
+export const grayLight = '#D3D3D3';
