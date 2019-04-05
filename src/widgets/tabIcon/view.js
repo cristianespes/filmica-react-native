@@ -19,16 +19,17 @@ class TabIcon extends React.Component {
             }
             </View>
         )
-        return (
-        <View style={styles.container}>
-            <Text style={styles.label}>{title}</Text>
-        </View>
-        );
+        // return (
+        // <View style={styles.container}>
+        //     <Text style={styles.label}>{title}</Text>
+        // </View>
+        // );
     }
   }
 
   TabIcon.defaultProps = {
-    title: ''
+    title: '',
+    focused: false
 }
 
   export default TabIcon;

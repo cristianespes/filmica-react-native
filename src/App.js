@@ -27,8 +27,9 @@ export default class App extends Component {
           <Stack key={'root'}>
             <Tabs
               key='TabBar'
-              inactiveBackgroundColor="#FFF"
-              activeBackgroundColor="#DDD"
+              //inactiveBackgroundColor="#FFF"
+              //activeBackgroundColor="#DDD"
+              tabBarPosition='bottom'
               showLabel={false}
               hideNavBar
               tabBarStyle={tabBarStyle}
@@ -40,7 +41,7 @@ export default class App extends Component {
                 title="Discover"
                 tabBarLabel="Catálogo"
                 icon={TabIcon}
-                titleStyle={{ color: 'white', alignSelf: 'center' }}
+                titleStyle={titleTabBarStyle}
               >
                 <Scene
                   key={'Films'}
@@ -58,7 +59,7 @@ export default class App extends Component {
                 title="Favorites"
                 tabBarLabel="Favoritos"
                 icon={TabIcon}
-                titleStyle={{ color: 'white', alignSelf: 'center' }}
+                titleStyle={titleTabBarStyle}
               >
                 <Scene
                   key={'FilmAdd'}
@@ -68,7 +69,7 @@ export default class App extends Component {
                 />
               </Stack>
             </Tabs>
-            <Scene
+            {/* <Scene
               key={'Films'}
               component={Films}
               //initial
@@ -77,18 +78,18 @@ export default class App extends Component {
               onRight={ _ => Actions.FilmAdd() }
               rightButtonTextStyle={{ color: colors.white }}
               {...navBarStyles}
-            />
+            /> */}
             <Scene
               key={'FilmDetail'}
               component={FilmDetail}
               {...navBarStyles}
             />
-            <Scene
+            {/* <Scene
               key={'FilmAdd'}
               component={FilmAdd}
               title={'Añadir película'}
               {...navBarStyles}
-            />
+            /> */}
           </Stack>
         </Router>
       </Provider>
@@ -105,4 +106,9 @@ navBarStyles= {
 
 tabBarStyle = {
   backgroundColor: colors.primaryColor
+}
+
+titleTabBarStyle = {
+  color: 'white',
+  alignSelf: 'center' 
 }
