@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.imagepicker.ImagePickerPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -27,7 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new ImagePickerPackage(),
-          new RNSpinkitPackage()
+          new RNSpinkitPackage(),
+          new AsyncStoragePackage()
       );
     }
 

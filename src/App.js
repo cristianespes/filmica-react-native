@@ -84,12 +84,12 @@ export default class App extends Component {
               component={FilmDetail}
               {...navBarStyles}
             />
-            {/* <Scene
+            <Scene
               key={'FilmAdd'}
               component={FilmAdd}
               title={'Añadir película'}
               {...navBarStyles}
-            /> */}
+            />
           </Stack>
         </Router>
       </Provider>

@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
          backgroundColor: colors.primaryColorLight
      },
      list: {
-         padding: 4
+         padding: 8
      },
      NoResults: {
          color: colors.white,

@@ -3,6 +3,7 @@ import * as api from '../../webservice';
 
 import { Actions } from 'react-native-router-flux';
 import { Alert } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage';
 
 function updateFilmsList(list, totalPages) {
     return {
@@ -54,11 +55,27 @@ export function updateFilmsListOffset() {
 
 function fetchFilmsList() {
     // ACCION CON THUNK
-    return (dispatch, getState) => {
+    // todo: eliminar async
+    return async (dispatch, getState) => {
 
         const page = getState().discoverFilms.page;
 
         dispatch(updateFetching(true));
+
+        // TODO: ELIMINAR
+        /*try {
+            const value = await AsyncStorage.getItem('FILM_LIST')
+            console.log('actions value: ', value);
+            if(value !== null) {
+                console.log('actions value DENTRO DEL IF')
+                const list = JSON.parse(value);
+                AsyncStorage.clear()
+            } else {
+                console.log('actions value DENTRO DEL ELSE');
+            }
+          } catch(e) {
+            console.log('actions error: ', e);
+          }*/
 
         api
             .fetchDiscoverFilms(page)
@@ -66,6 +83,8 @@ function fetchFilmsList() {
                 //const list = res.data.results;
                 const list = [...getState().discoverFilms.discoverList, ...res.data.results];
                 const totalPages = res.data.total_pages;
+                // TODO: ELIMINAR
+                //AsyncStorage.setItem('FILM_LIST', JSON.stringify(list));
                 dispatch(updateFilmsList(list, totalPages))
             })
             .catch( err => {
