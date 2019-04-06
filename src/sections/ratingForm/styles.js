@@ -10,6 +10,7 @@ export default StyleSheet.create({
         marginBottom: 10,
         color: colors.white,
         marginHorizontal: 20,
-        marginTop: 20
+        marginTop: 20,
+        textAlign: 'center'
     }
 });

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, SafeAreaView, Alert } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import { View, Text, ScrollView, SafeAreaView, Linking } from 'react-native';
 import _ from 'lodash';
 
 import styles from './styles';
@@ -21,27 +20,57 @@ class FilmDetail extends Component {
     render() {
         const { film, favList } = this.props;
         const genres = film.genres ? this._getGenres(film.genres) : '';
-        const producers = film.genres ? this._getProducers(film.production_companies) : '';
+        const producers = film.production_companies ? this._getProducers(film.production_companies) : '';
         const release_date = film.release_date ? this._formatterDate(film.release_date) : '';
         return (
             <ScrollView style={styles.container}>
                 <FilmHeader film={film} />
                 <SafeAreaView>
-                    <Text style={styles.section}>{ 'Sinópsis:' }</Text>
-                    <Text style={styles.content}>{ film.overview }</Text>
-                    <Text style={styles.section}>{ 'Estreno:' }</Text>
-                    <Text style={styles.content}>{ release_date }</Text>
-                    <Text style={styles.section}>{ 'Género:' }</Text>
-                    <Text style={styles.content}>{ genres }</Text>
-                    <Text style={styles.section}>{ 'Situación:' }</Text>
-                    <Text style={styles.content}>{ film.status }</Text>
-                    <Text style={styles.section}>{ 'Duración:' }</Text>
-                    <Text style={styles.content}>{ `${film.runtime} min`}</Text>
                     {
-                        film.tagline ?
+                        film.overview ?
+                        <View>
+                            <Text style={styles.section}>{ 'Sinópsis:' }</Text>
+                            <Text style={styles.content}>{ film.overview }</Text>
+                        </View>
+                        : null
+                    }
+                    {
+                        film.release_date ?
+                        <View>
+                            <Text style={styles.section}>{ 'Estreno:' }</Text>
+                            <Text style={styles.content}>{ release_date }</Text>
+                        </View>
+                        : null
+                    }
+                    {
+                        film.genres ?
+                        <View>
+                            <Text style={styles.section}>{ 'Género:' }</Text>
+                            <Text style={styles.content}>{ genres }</Text>
+                        </View>
+                        : null
+                    }
+                    {
+                        film.status ?
+                        <View>
+                            <Text style={styles.section}>{ 'Situación:' }</Text>
+                            <Text style={styles.content}>{ film.status }</Text>
+                        </View>
+                        : null
+                    }
+                    {
+                        film.runtime ?
+                        <View>
+                            <Text style={styles.section}>{ 'Duración:' }</Text>
+                        <Text style={styles.content}>{ `${film.runtime} min`}</Text>
+                        </View>
+                        : null
+                    }
+                    {
+                        film.homepage ?
                         <View>
                             <Text style={styles.section}>{ 'Web:' }</Text>
-                            <Text style={styles.content}>{ film.homepage }</Text>
+                            <Text style={styles.content} onPress={ this._goToURL }>{ film.homepage }</Text>
                         </View>
                         : null
                     }
@@ -121,6 +150,20 @@ class FilmDetail extends Component {
             return date
         }
     }
+
+    _goToURL = () => {
+        const { film } = this.props;
+
+        if (film.homepage) {
+            Linking.canOpenURL(film.homepage).then(supported => {
+                if (supported) {
+                  Linking.openURL(film.homepage);
+                } else {
+                  console.log('Don\'t know how to open URI: ' + this.props.url);
+                }
+              });
+        }
+      }
 
     _saveFavorite = () => {
         const { film } = this.props;
