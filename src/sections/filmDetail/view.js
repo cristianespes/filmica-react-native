@@ -21,6 +21,7 @@ class FilmDetail extends Component {
         const { film, favList } = this.props;
         const genres = film.genres ? this._getGenres(film.genres) : '';
         const producers = film.genres ? this._getProducers(film.production_companies) : '';
+        const release_date = film.release_date ? this._formatterDate(film.release_date) : '';
         return (
             <ScrollView style={styles.container}>
                 <FilmHeader film={film} />
@@ -28,7 +29,7 @@ class FilmDetail extends Component {
                     <Text style={styles.section}>{ 'Sinópsis:' }</Text>
                     <Text style={styles.content}>{ film.overview }</Text>
                     <Text style={styles.section}>{ 'Estreno:' }</Text>
-                    <Text style={styles.content}>{ film.release_date }</Text>
+                    <Text style={styles.content}>{ release_date }</Text>
                     <Text style={styles.section}>{ 'Género:' }</Text>
                     <Text style={styles.content}>{ genres }</Text>
                     <Text style={styles.section}>{ 'Situación:' }</Text>
@@ -41,8 +42,7 @@ class FilmDetail extends Component {
                             <Text style={styles.section}>{ 'Web:' }</Text>
                             <Text style={styles.content}>{ film.homepage }</Text>
                         </View>
-                        :
-                        null
+                        : null
                     }
                     {
                         film.tagline ?
@@ -50,15 +50,20 @@ class FilmDetail extends Component {
                             <Text style={styles.section}>{ 'Cabecera de la película:' }</Text>
                             <Text style={styles.content}>{ film.tagline }</Text>
                         </View>
-                        :
-                        null
+                        : null
                     }
                     <Text style={styles.section}>{ 'Productores:' }</Text>
                     <Text style={styles.content}>{ producers }</Text>
                     <Text style={styles.section}>{ 'Idioma original:' }</Text>
                     <Text style={styles.content}>{ film.original_language }</Text>
-                    <Text style={styles.section}>{ 'Putuación media:' }</Text>
-                    <Text style={styles.content}>{ film.vote_average }</Text>
+                    {
+                        film.vote_average > 0 ?
+                        <View>
+                            <Text style={styles.section}>{ 'Putuación media:' }</Text>
+                            <Text style={styles.content}>{ film.vote_average }</Text>
+                        </View>
+                        : null
+                    }
                     {
                         !_.find(favList, film) &&
                         <Button
@@ -109,6 +114,18 @@ class FilmDetail extends Component {
         }
 
         return results;
+    }
+
+    _formatterDate = date => {
+        try {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const release_date = new Date(date)
+            release_date.toLocaleDateString("es", options)
+            console.log('date: ', release_date.toLocaleDateString("es", options))
+            return release_date.toLocaleDateString("es", options)
+        } catch (e) {
+            return date
+        }
     }
 
     _saveFavorite = () => {
