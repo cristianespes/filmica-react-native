@@ -6,7 +6,8 @@ import * as FavoriteActions from '../../redux/favoriteList/actions';
 const mapStateToProps = (state) => {
     return {
         film: state.filmDetail.film,
-        isFetching: state.filmDetail.isFetching
+        isFetching: state.filmDetail.isFetching,
+        favList: state.favoriteList.favoriteList
     };
 };
 
@@ -18,8 +19,10 @@ const mapDispatchToProps = (dispatch, props) => {
             dispatch(DetailActions.initFilmDetail(filmSelected));
         },
         saveFavorite: film => {
-            console.log('mapDispatchToProps: ', film)
             dispatch(FavoriteActions.saveFavoriteList(film));
+        },
+        removeFavoriteFilm: film => {
+            dispatch(FavoriteActions.removeFavoriteFilm(film));
         }
     };
 };

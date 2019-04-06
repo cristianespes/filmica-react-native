@@ -8,8 +8,7 @@ import { FilmHeader, Button } from '../../widgets';
 
 class FilmDetail extends Component {
     static defaultProps = {
-        film: {},
-        saveFavorite: () => {}
+        film: {}
     };
 
     constructor(props) {
@@ -19,7 +18,7 @@ class FilmDetail extends Component {
     }
 
     render() {
-        const { film, saveFavorite } = this.props;
+        const { film, favList } = this.props;
         const genres = film.genres ? this._getGenres(film.genres) : '';
         const producers = film.genres ? this._getProducers(film.production_companies) : '';
         return (
@@ -60,11 +59,23 @@ class FilmDetail extends Component {
                     <Text style={styles.content}>{ film.original_language }</Text>
                     <Text style={styles.section}>{ 'Putuación media:' }</Text>
                     <Text style={styles.content}>{ film.vote_average }</Text>
-                    <Button
-                        label={'Añadir a favoritos'}
-                        onPress={this._saveFavorite}
-                        buttonStyle={{ margin: 20 }}
-                    />
+                    {
+                        !_.find(favList, film) &&
+                        <Button
+                            label={'Añadir a favoritos'}
+                            onPress={this._saveFavorite}
+                            buttonStyle={{ margin: 20 }}
+                        />
+                    }
+                    {
+                        _.find(favList, film) &&
+                        <Button
+                            label={'Eliminar de favoritos'}
+                            onPress={this._removeFavorite}
+                            buttonStyle={{ margin: 20 }}
+                        />
+                    }
+                    
                     <Button
                         label={'Limpiar'}
                         onPress={this._clear}
@@ -103,6 +114,11 @@ class FilmDetail extends Component {
     _saveFavorite = () => {
         const { film } = this.props;
         this.props.saveFavorite(film)
+    }
+
+    _removeFavorite = () => {
+        const { film } = this.props;
+        this.props.removeFavoriteFilm(film)
     }
 
     _clear = () => {

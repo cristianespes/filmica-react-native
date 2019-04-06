@@ -15,8 +15,6 @@ class FavList extends Component {
 
     render() {
         const { favList } = this.props;
-        console.log("view favList: ", favList);
-        console.log("view favList length: ", favList.length);
         return (
             <View style={styles.container}>
                 <FlatList 

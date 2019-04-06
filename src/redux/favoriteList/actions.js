@@ -40,11 +40,9 @@ export function initFavoriteList() {
 
 export function saveFavoriteList(film) {
     return async (dispatch, getState) => {
-        //const page = getState().discoverFilms.page;
         dispatch(updateFetching(true));
-
         try {
-            const list = await AsyncStorage.getItem(FILM_FAV)
+            /*const list = await AsyncStorage.getItem(FILM_FAV)
             console.log('saveFavoriteList list: ', list);
             console.log('saveFavoriteList film: ', film);
             if (list !== null) {
@@ -62,6 +60,28 @@ export function saveFavoriteList(film) {
                 const favList = [film];
                 await AsyncStorage.setItem(FILM_FAV, JSON.stringify(favList));
             }
+            dispatch(updateFetching(false));*/
+
+            const { favoriteList } = getState().favoriteList;
+            const favoriteListUpdated = _.concat(favoriteList, film)
+            await AsyncStorage.setItem(FILM_FAV, JSON.stringify(favoriteListUpdated));
+            dispatch(updateFavoriteList(favoriteListUpdated));
+            dispatch(updateFetching(false));
+        } catch(e) {
+            console.log('actions error: ', e);
+            dispatch(updateFetching(false));
+        }
+    };
+};
+
+export function removeFavoriteFilm(film) {
+    return async (dispatch, getState) => {
+        dispatch(updateFetching(true));
+        try {
+            const { favoriteList } = getState().favoriteList;
+            const favoriteListUpdated = _.filter(favoriteList, item => item.id != film.id);
+            await AsyncStorage.setItem(FILM_FAV, JSON.stringify(favoriteListUpdated));
+            dispatch(updateFavoriteList(favoriteListUpdated));
             dispatch(updateFetching(false));
         } catch(e) {
             console.log('actions error: ', e);
