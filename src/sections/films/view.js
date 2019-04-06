@@ -12,11 +12,11 @@ class Films extends Component {
         super(props);
 
         props.getFilmsList();
+        props.initFavoriteList();
     }
 
     render() {
-        //console.log("this.props: ", this.props);
-        const { list, isFetching, page } = this.props;
+        const { list, isFetching } = this.props;
         return (
             <View style={styles.container}>
                 <FlatList 

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import View from './view';
 import * as DiscoverActions from '../../redux/discoverFilms/actions';
+import * as FavoriteActions from '../../redux/favoriteList/actions';
 
 const mapStateToProps = (state) => {
     return {
@@ -21,6 +22,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         updateFilmsListOffset: () => {
             dispatch(DiscoverActions.updateFilmsListOffset());
+        },
+        initFavoriteList: () => {
+            dispatch(FavoriteActions.initFavoriteList());
         }
     };
 };

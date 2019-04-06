@@ -21,8 +21,6 @@ export function fetchDetailFilm(id) {
 
 export function postRatingFilm(id, rating) {
     const url = `${RATING_URL}/${id}/rating?api_key=${API_KEY}`;
-    console.log('url: ', url)
-    console.log('rating: ', url)
 
     return axios.post(url, rating);
 }

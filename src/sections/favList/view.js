@@ -10,7 +10,7 @@ class FavList extends Component {
     constructor(props) {
         super(props);
 
-        this.props.initFavoriteList()
+        //props.initFavoriteList()
     }
 
     render() {

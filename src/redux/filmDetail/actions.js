@@ -39,7 +39,6 @@ function fetchDetailFilm(filmSelected) {
                 dispatch(updateFilm(filmDetail));
             })
             .catch( err => {
-                console.log("fetchDetailFilm err: ", err);
                 this.setState({ err: err });
             })
             .finally( () => {

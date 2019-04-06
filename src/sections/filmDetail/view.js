@@ -81,12 +81,6 @@ class FilmDetail extends Component {
                             buttonStyle={{ margin: 20 }}
                         />
                     }
-                    
-                    <Button
-                        label={'Limpiar'}
-                        onPress={this._clear}
-                        buttonStyle={{ margin: 20 }}
-                    />
                 </SafeAreaView>
             </ScrollView>
         );
@@ -136,10 +130,6 @@ class FilmDetail extends Component {
     _removeFavorite = () => {
         const { film } = this.props;
         this.props.removeFavoriteFilm(film)
-    }
-
-    _clear = () => {
-        AsyncStorage.clear()
     }
 }
 

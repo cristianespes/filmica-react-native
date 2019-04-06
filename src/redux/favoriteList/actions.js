@@ -32,7 +32,6 @@ export function initFavoriteList() {
 
             dispatch(updateFetching(false));
         } catch(e) {
-            console.log('actions error: ', e);
             dispatch(updateFetching(false));
         }
     };
@@ -48,7 +47,6 @@ export function saveFavoriteList(film) {
             dispatch(updateFavoriteList(favoriteListUpdated));
             dispatch(updateFetching(false));
         } catch(e) {
-            console.log('actions error: ', e);
             dispatch(updateFetching(false));
         }
     };
@@ -64,7 +62,6 @@ export function removeFavoriteFilm(film) {
             dispatch(updateFavoriteList(favoriteListUpdated));
             dispatch(updateFetching(false));
         } catch(e) {
-            console.log('actions error: ', e);
             dispatch(updateFetching(false));
         }
     };

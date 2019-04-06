@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, SafeAreaView, Text, Alert } from 'react-native';
+import { View, SafeAreaView, Text, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from "react-native-router-flux";
 
 import styles from './styles';
@@ -12,6 +12,7 @@ class RatingForm extends Component {
     render() {
         const { film } = this.props;
         return (
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                 <SafeAreaView style={styles.container}>
                     <FilmHeader film={film} />
                     <View style={{ flex: 1 }}>
@@ -32,6 +33,7 @@ class RatingForm extends Component {
                         isFetching={this.props.isFetching}
                     />
                 </SafeAreaView>
+            </TouchableWithoutFeedback>   
         );
     }
 
@@ -57,23 +59,9 @@ class RatingForm extends Component {
         
         this.setState({ ratingError: '' });
 
-        /*Alert.alert(
-            'Calificación enviada',
-            '¡Gracias por la valoración!',
-            [
-              {
-                text: 'Cancel',
-                onPress: () => {},
-                style: 'cancel',
-              },
-              {text: 'Aceptar', onPress: () => Actions.pop()},
-            ],
-            {cancelable: false},
-        );*/
-
         api.postRatingFilm(this.props.film.id, { "value": parseFloat(rating).toFixed(1) })
         .then( res => {
-            console.log('postRatingFilm res: ', res)
+            //console.log('postRatingFilm res: ', res)
             Alert.alert(
                 'Calificación enviada',
                 '¡Gracias por la valoración!',
@@ -92,7 +80,7 @@ class RatingForm extends Component {
             console.log("postRatingFilm err: ", err);
             Alert.alert(
                 'Error',
-                'Ha ocurrido un error al enviar a TMDB',
+                'No ha sido posible valorar la película en TMDB',
                 [
                     {text: 'Aceptar', onPress: () => {} },
                 ],

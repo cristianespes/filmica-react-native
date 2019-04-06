@@ -73,7 +73,6 @@ function fetchFilmsList() {
                 dispatch(updateFilmsList(list, totalPages))
             })
             .catch( err => {
-                console.log("fetchDiscoverFilms err: ", err);
                 this.setState({ err: err });
             })
             .finally( () => {

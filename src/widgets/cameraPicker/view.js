@@ -24,8 +24,6 @@ class CameraPicker extends Component {
 
     _showImagePicker = () => {
         ImagePicker.showImagePicker(CAMERA_OPTIONS, (response) => {
-            //console.log('Response = ', response);
-          
             if (response.uri) {
               this.props.onChange(response);
             }
