@@ -1,22 +1,24 @@
 import { connect } from 'react-redux';
-import View from './view';
-import * as DiscoverActions from '../../redux/discoverFilms/actions';
 
-/*const mapStateToProps = state => {
-    return {
-      isFetching: state.discoverFilms.isFetching
-    };
+import View from './view';
+import * as FavoriteActions from '../../redux/favoriteList/actions';
+
+const mapStateToProps = (state) => {
+  return {
+      favList: state.favoriteList.favoriteList,
+      isFetching: state.favoriteList.isFetching
   };
+};
   
-  const mapDispatchToProps = (dispatch, props) => {
-    return {
-      addFilm: film => {
-        dispatch(DiscoverActions.addFilm(film))
-      }
-    };
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    initFavoriteList: () => {
+      dispatch(FavoriteActions.initFavoriteList());
+    }
   };
+};
   
-  export default connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(View);*/
+  )(View);

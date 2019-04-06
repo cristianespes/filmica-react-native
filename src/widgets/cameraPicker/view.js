@@ -24,13 +24,9 @@ class CameraPicker extends Component {
 
     _showImagePicker = () => {
         ImagePicker.showImagePicker(CAMERA_OPTIONS, (response) => {
-            console.log('Response = ', response);
+            //console.log('Response = ', response);
           
             if (response.uri) {
-              // You can also display the image using data:
-              // const source = { uri: response.uri };
-              // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-          
               this.props.onChange(response);
             }
           });

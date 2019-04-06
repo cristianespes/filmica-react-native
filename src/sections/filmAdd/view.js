@@ -68,8 +68,6 @@ class FilmAdd extends Component {
     }
 
     _onSubmit = () => {
-        console.log('Inicia onSubmit');
-
         const { title, overview, release } = this.state;
         if (!title || !overview || !release) {
 

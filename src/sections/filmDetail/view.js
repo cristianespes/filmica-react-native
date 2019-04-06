@@ -6,11 +6,10 @@ import _ from 'lodash';
 import styles from './styles';
 import { FilmHeader, Button } from '../../widgets';
 
-const FILM_FAV = 'FILM_FAV';
-
 class FilmDetail extends Component {
     static defaultProps = {
-        film: {}
+        film: {},
+        saveFavorite: () => {}
     };
 
     constructor(props) {
@@ -20,7 +19,7 @@ class FilmDetail extends Component {
     }
 
     render() {
-        const { film } = this.props;
+        const { film, saveFavorite } = this.props;
         const genres = film.genres ? this._getGenres(film.genres) : '';
         const producers = film.genres ? this._getProducers(film.production_companies) : '';
         return (
@@ -101,42 +100,9 @@ class FilmDetail extends Component {
         return results;
     }
 
-    _saveFavorite = async () => {
+    _saveFavorite = () => {
         const { film } = this.props;
-
-        console.log('Nombre pelicula: ', film.title)
-
-        try {
-            const list = await AsyncStorage.getItem(FILM_FAV)
-            console.log('list: ', list);
-            if(list !== null) {
-                const favList = JSON.parse(list);
-                
-                /*const savedFilm = favList.filter((item) => {
-                    return item.id
-                })
-                if (savedFilm !== null) {
-                    console.log('La pelicula ya existe')
-                } else {
-                    console.log('La pelicula NO existe')
-                    //favList.concat(film)
-                }*/
-
-                if ( favList.filter((item) => { return item.id === film.id}).length > 0 ) {
-                    console.log('La pelicula ya existe')
-                } else {
-                    console.log('La pelicula NO existe')
-                    await AsyncStorage.setItem(FILM_FAV, JSON.stringify((_.concat(favList, film))))
-                    alert(`${film.title} añadida a favoritos`)
-                }
-                
-            } else {
-                await AsyncStorage.setItem(FILM_FAV, JSON.stringify([film]));
-                alert(`${film.title} añadida a favoritos`)
-            }
-          } catch(e) {
-            console.log('actions error: ', e);
-          }
+        this.props.saveFavorite(film)
     }
 
     _clear = () => {

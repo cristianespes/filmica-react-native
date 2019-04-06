@@ -15,7 +15,7 @@ class Films extends Component {
     }
 
     render() {
-        console.log("this.props: ", this.props);
+        //console.log("this.props: ", this.props);
         const { list, isFetching, page } = this.props;
         return (
             <View style={styles.container}>
