@@ -13,4 +13,5 @@ const URL_SEARCH_ID = 'https://api.themoviedb.org/3/movie/movie_id?api_key=e6872
 const URL_TRENDING = 'https://api.themoviedb.org/3/trending/movie/week?api_key=e68728e1e31dcda82f7b2b896f0c47be';
 const URL_SEARCH = 'https://api.themoviedb.org/3/search/movie?api_key=e68728e1e31dcda82f7b2b896f0c47be&language=en-US&page=1&include_adult=false&query=';
 const URL_GENRES = 'https://api.themoviedb.org/3/genre/movie/list?api_key=e68728e1e31dcda82f7b2b896f0c47be&language=en-US';
+/movie/{movie_id}/rating
 */

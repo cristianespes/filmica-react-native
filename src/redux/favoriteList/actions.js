@@ -42,26 +42,6 @@ export function saveFavoriteList(film) {
     return async (dispatch, getState) => {
         dispatch(updateFetching(true));
         try {
-            /*const list = await AsyncStorage.getItem(FILM_FAV)
-            console.log('saveFavoriteList list: ', list);
-            console.log('saveFavoriteList film: ', film);
-            if (list !== null) {
-                const favList = JSON.parse(list);
-
-                if ( favList.filter((item) => { return item.id === film.id}).length > 0 ) {
-                    
-                } else {
-                    const updatedFavList = _.concat(favList, film);
-                    console.log('updatedFavList: ', updatedFavList);
-                    await AsyncStorage.setItem(FILM_FAV, JSON.stringify(updatedFavList))
-                    dispatch(updateFavoriteList(updatedFavList));
-                }
-            } else {
-                const favList = [film];
-                await AsyncStorage.setItem(FILM_FAV, JSON.stringify(favList));
-            }
-            dispatch(updateFetching(false));*/
-
             const { favoriteList } = getState().favoriteList;
             const favoriteListUpdated = _.concat(favoriteList, film)
             await AsyncStorage.setItem(FILM_FAV, JSON.stringify(favoriteListUpdated));

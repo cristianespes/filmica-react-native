@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 import styles from './styles';
 import { FilmHeader, Button } from '../../widgets';
+import { LANGUAGE } from '../../config/api';
 
 class FilmDetail extends Component {
     static defaultProps = {
@@ -120,7 +121,7 @@ class FilmDetail extends Component {
         try {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             const release_date = new Date(date)
-            release_date.toLocaleDateString("es", options)
+            release_date.toLocaleDateString(LANGUAGE, options)
             console.log('date: ', release_date.toLocaleDateString("es", options))
             return release_date.toLocaleDateString("es", options)
         } catch (e) {
