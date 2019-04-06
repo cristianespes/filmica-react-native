@@ -6,6 +6,7 @@ export const LANGUAGE = 'es';
 
 export const DISCOVER_URL = 'discover/movie';
 export const SEARCH_ID_URL = 'movie';
+export const RATING_URL = 'movie';
 
 /*
 const URL_DISCOVER_PAGING = 'https://api.themoviedb.org/3/discover/movie?api_key=e68728e1e31dcda82f7b2b896f0c47be&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=';

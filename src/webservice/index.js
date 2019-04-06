@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL, API_KEY, LANGUAGE, DISCOVER_URL, SEARCH_ID_URL } from '../config/api';
+import { BASE_URL, API_KEY, LANGUAGE, DISCOVER_URL, SEARCH_ID_URL, RATING_URL } from '../config/api';
 
 // Configuración inicial para la api
 export function configureAxios() {
@@ -17,5 +17,13 @@ export function fetchDetailFilm(id) {
     const url = `${SEARCH_ID_URL}/${id}?api_key=${API_KEY}&language=${LANGUAGE}`;
 
     return axios.get(url);
+}
+
+export function postRatingFilm(id, rating) {
+    const url = `${RATING_URL}/${id}/rating?api_key=${API_KEY}`;
+    console.log('url: ', url)
+    console.log('rating: ', url)
+
+    return axios.post(url, rating);
 }
 

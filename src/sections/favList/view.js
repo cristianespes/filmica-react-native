@@ -36,7 +36,7 @@ class FavList extends Component {
     );
 
     _onFilmTapped = film => {
-        // this.props.updateFilmSelected(film)
+        this.props.updateFilmSelected(film)
         Actions.FilmDetail({ film, title: film.title });
     }
 

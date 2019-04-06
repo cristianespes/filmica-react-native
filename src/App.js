@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native';
 import { Stack, Router, Scene, Actions, Tabs } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 
-import { Films, FilmDetail, FilmAdd, FavList } from './sections';
+import { Films, FilmDetail, FilmAdd, FavList, RatingForm } from './sections';
 import { configureAxios } from './webservice';
 import * as colors from './commons/colors';
 import { store } from './config/redux';
@@ -82,12 +82,21 @@ export default class App extends Component {
             <Scene
               key={'FilmDetail'}
               component={FilmDetail}
+              rightTitle={'Valorar'}
+              onRight={ _ => Actions.RatingForm({ film: store.getState().discoverFilms.selected }) }
+              rightButtonTextStyle={{ color: colors.white }}
               {...navBarStyles}
             />
             <Scene
               key={'FilmAdd'}
               component={FilmAdd}
               title={'Añadir película'}
+              {...navBarStyles}
+            />
+            <Scene
+              key={'RatingForm'}
+              component={RatingForm}
+              title={'Añadir valoración'}
               {...navBarStyles}
             />
           </Stack>

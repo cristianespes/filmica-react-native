@@ -122,7 +122,6 @@ class FilmDetail extends Component {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             const release_date = new Date(date)
             release_date.toLocaleDateString(LANGUAGE, options)
-            console.log('date: ', release_date.toLocaleDateString("es", options))
             return release_date.toLocaleDateString("es", options)
         } catch (e) {
             return date
