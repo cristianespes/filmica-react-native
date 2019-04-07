@@ -9,3 +9,4 @@ export const black = 'black';
 export const white = 'white';
 export const gray = 'gray';
 export const grayLight = '#D3D3D3';
+export const blueLink = '#afcfee';

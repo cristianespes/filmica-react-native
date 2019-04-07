@@ -5,6 +5,7 @@ import _ from 'lodash';
 import styles from './styles';
 import { FilmHeader, Button } from '../../widgets';
 import { LANGUAGE } from '../../config/api';
+import * as colors from '../../commons/colors';
 
 class FilmDetail extends Component {
     static defaultProps = {
@@ -62,15 +63,15 @@ class FilmDetail extends Component {
                         film.runtime ?
                         <View>
                             <Text style={styles.section}>{ 'Duración:' }</Text>
-                        <Text style={styles.content}>{ `${film.runtime} min`}</Text>
+                            <Text style={styles.content}>{ `${film.runtime} min`}</Text>
                         </View>
                         : null
                     }
                     {
-                        film.homepage ?
+                        film.homepage ? 
                         <View>
                             <Text style={styles.section}>{ 'Web:' }</Text>
-                            <Text style={styles.content} onPress={ this._goToURL }>{ film.homepage }</Text>
+                            <Text style={[styles.content, { color: colors.blueLink }]} onPress={ this._goToURL }>{ film.homepage }</Text>
                         </View>
                         : null
                     }
