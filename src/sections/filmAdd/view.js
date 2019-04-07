@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, ScrollView, SafeAreaView, Alert } from 'react-native';
+import { View, Picker, Text, ScrollView, SafeAreaView, Alert } from 'react-native';
 import _ from 'lodash';
 import { Actions } from "react-native-router-flux";
 
@@ -39,6 +39,7 @@ class FilmAdd extends Component {
                             onChangeText={ overview => this.setState({ overview })}
                             value={this.state.overview}
                             error={this.state.overviewError}
+                            multiline={true}
                         />
 
                         <Input
@@ -53,6 +54,7 @@ class FilmAdd extends Component {
                             label={'Género:'}
                             onChangeText={ genre => this.setState({ genre })}
                             value={this.state.genre}
+                            placeholder={'acción, comedia'}
                             error={this.state.genreError}
                         />
 
@@ -62,6 +64,7 @@ class FilmAdd extends Component {
                             value={this.state.duration}
                             placeholder={'Minutos'}
                             error={this.state.durationError}
+                            keyboardType={'number-pad'}
                         />
 
                         <View style={{ margin: 20 }}>
@@ -69,6 +72,7 @@ class FilmAdd extends Component {
                             <CameraPicker
                                 value={this.state.image}
                                 onChange={ image => this.setState({ image }) }
+                                label={'Seleccionar póster'}
                             />
                         </View>
 

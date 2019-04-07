@@ -14,6 +14,9 @@ class Input extends Component {
             inputStyle,
             errorStyle,
             keyboardType,
+            maxLength,
+            multiline,
+            numberOfLines,
             placeholder,
             placeholderTextColor,
             selectionColor
@@ -26,6 +29,9 @@ class Input extends Component {
                     onChangeText={ onChangeText }
                     value={ value }
                     keyboardType={keyboardType}
+                    maxLength={maxLength}
+                    multiline={multiline}
+                    numberOfLines={numberOfLines}
                     placeholder={placeholder}
                     placeholderTextColor={placeholderTextColor}
                     underlineColorAndroid={'transparent'}
@@ -49,6 +55,9 @@ Input.defaultProps = {
     inputStyle: {},
     errorStyle: {},
     keyboardType: 'default',
+    maxLength: null,
+    multiline: false,
+    numberOfLines: null,
     placeholder: '',
     placeholderTextColor: 'rgba(255,255,255,0.4)',
     selectionColor: 'rgba(255,255,255,0.4)'
