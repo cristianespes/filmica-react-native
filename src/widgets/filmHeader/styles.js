@@ -34,6 +34,21 @@ const styles = StyleSheet.create({
         color: 'white',
         flex: 1,
         fontWeight: 'bold'
+    },
+    footer: {
+        width: '100%',
+        height: 50,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+    },
+    footerText: {
+        fontSize: 16,
+        color: colors.white,
+        textAlign: 'center',
     }
   });
 
