@@ -160,7 +160,7 @@ class FilmDetail extends Component {
                 if (supported) {
                   Linking.openURL(film.homepage);
                 } else {
-                  console.log('Don\'t know how to open URI: ' + this.props.url);
+                  //('Don\'t know how to open URI: ' + this.props.url);
                 }
               });
         }

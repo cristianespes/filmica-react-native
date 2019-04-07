@@ -77,7 +77,7 @@ class RatingForm extends Component {
             );
         })
         .catch( err => {
-            console.log("postRatingFilm err: ", err);
+            //console.log("postRatingFilm err: ", err);
             Alert.alert(
                 'Error',
                 'No ha sido posible valorar la película en TMDB',
