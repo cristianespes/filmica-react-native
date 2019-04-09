@@ -15,7 +15,7 @@ class FilmHeader extends Component {
     
     render() {
         const { isImageViewVisible } = this.state;
-        const { film } = this.props;
+        const { film, displayImage } = this.props;
         const poster = film && film.poster_path ? { uri: `${BASE_URL_IMAGE}${film.poster_path}` } : null;
         const backdrop = _.has(film, 'backdrop_path') ? { uri: `${BASE_URL_BACKDROP}${_.get(film,'backdrop_path', null)}` } : null;
         const imageBackdrop = [
@@ -31,6 +31,7 @@ class FilmHeader extends Component {
         return (
             <SafeAreaView>
                 <TouchableOpacity
+                        disabled={!displayImage}
                         style={styles.container}
                         onPress={() => {
                             this.setState({ isImageViewVisible: true });
@@ -42,14 +43,18 @@ class FilmHeader extends Component {
                         <Image style = {styles.poster} source = {poster} />
                         <Text onPress={ () => alert('hola')} style= {styles.title}>{film.title}</Text>
                     </View>
-                    <ImageView
-                        glideAlways
-                        images={imageBackdrop}
-                        animationType="fade"
-                        isVisible={isImageViewVisible}
-                        renderFooter={this._renderFooter}
-                        onClose={() => this.setState({isImageViewVisible: false})}
-                    />
+                    {
+                        displayImage &&
+                        <ImageView
+                            glideAlways
+                            images={imageBackdrop}
+                            animationType="fade"
+                            isVisible={isImageViewVisible}
+                            renderFooter={this._renderFooter}
+                            onClose={() => this.setState({isImageViewVisible: false})}
+                        />
+                    }
+                    
                 </TouchableOpacity>
             </SafeAreaView>
         );
@@ -62,6 +67,10 @@ class FilmHeader extends Component {
             </View>
         );
     }
+}
+
+FilmHeader.defaultProps = {
+    displayImage: true
 }
 
 export default FilmHeader;

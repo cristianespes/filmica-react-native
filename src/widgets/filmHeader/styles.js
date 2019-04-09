@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         opacity: 0.8
     },
     title: {
-        fontSize: 16,
+        fontSize: 18,
         color: 'white',
         flex: 1,
         fontWeight: 'bold'

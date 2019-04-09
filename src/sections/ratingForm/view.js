@@ -16,8 +16,8 @@ class RatingForm extends Component {
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                 <SafeAreaView style={styles.container}>
-                    <FilmHeader film={film} />
-                    <View style={{ flex: 1 }}>
+                    <FilmHeader film={film} displayImage={false} />
+                    <View style={{ flex: 1, marginTop: 20 }}>
                         <Input
                             label={'Valoración:'}
                             onChangeText={ rating => this.setState({ rating })}
