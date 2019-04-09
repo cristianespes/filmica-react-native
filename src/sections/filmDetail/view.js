@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, SafeAreaView, Linking } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView, Linking, ActivityIndicator } from 'react-native';
 import _ from 'lodash';
 
 import styles from './styles';
@@ -19,10 +19,11 @@ class FilmDetail extends Component {
     }
 
     render() {
-        const { film, favList } = this.props;
+        const { film, favList, isFetching } = this.props;
         const genres = film.genres ? this._getGenres(film.genres) : '';
         const producers = film.production_companies ? this._getProducers(film.production_companies) : '';
         const release_date = film.release_date ? this._formatterDate(film.release_date) : '';
+        if (isFetching) return <ActivityIndicator color={colors.accentColor} size='large' style={{flex: 1, backgroundColor: colors.primaryColorLight}} />
         return (
             <ScrollView style={styles.container}>
                 <FilmHeader film={film} />

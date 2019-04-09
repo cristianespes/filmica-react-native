@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { View, SafeAreaView, Text, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from "react-native-router-flux";
+import AsyncStorage from '@react-native-community/async-storage';
 
 import styles from './styles';
-import { Input, Button, FilmHeader } from '../../widgets'
-import * as api from '../../webservice'
+import { Input, Button, FilmHeader } from '../../widgets';
+import * as api from '../../webservice';
+import { GUEST_SESSION_ID } from '../../commons/constants';
 
 class RatingForm extends Component {
-    state = { rating: '', ratingError: '' }
+    state = { rating: '', ratingError: '', attempts: 0 }
 
     render() {
         const { film } = this.props;
@@ -37,7 +39,7 @@ class RatingForm extends Component {
         );
     }
 
-    _onSubmit = () => {
+    _onSubmit = async () => {
         const { rating } = this.state;
         if (!rating) {
             const ratingError = rating ? '' : "Campo obligatorio";
@@ -59,12 +61,42 @@ class RatingForm extends Component {
         
         this.setState({ ratingError: '' });
 
-        api.postRatingFilm(this.props.film.id, { "value": parseFloat(rating.replace(",",".")).toFixed(1) })
+        try {
+            const guestSession = await AsyncStorage.getItem(GUEST_SESSION_ID)
+            const ratingFloat = parseFloat(rating.replace(",",".")).toFixed(1);
+            
+            if (guestSession !== null) {
+                this._sendRatingFilm(this.props.film.id, ratingFloat, guestSession)
+            } else {
+                this._requestGuestSession(ratingFloat);
+            }
+        } catch(e) {
+            console.log("error: ", e);
+        }
+    }
+
+    _requestGuestSession = (rating) => {
+        api.requestGuestSession()
         .then( res => {
-            //console.log('postRatingFilm res: ', res)
+            //console.log("_requestGuestSession res: ", res)
+            if (res.data.success == true) {
+                AsyncStorage.setItem(GUEST_SESSION_ID, res.data.guest_session_id);
+                this._sendRatingFilm(this.props.film.id, rating, res.data.guest_session_id);
+            }
+        })
+        .catch( err => {
+            //console.log("_requestGuestSession err: ", err);
+            this._errorMessage();
+        });
+    }
+
+    _sendRatingFilm = (movieId, rating, guestSession) => {
+        api.postRatingFilm(movieId, { "value": rating }, guestSession)
+        .then( res => {
+            //console.log('_sendRatingFilm res: ', res)
             Alert.alert(
                 'Calificación enviada',
-                '¡Gracias por la valoración!',
+                '¡Gracias por enviarnos su valoración!',
                 [
                     {
                     text: 'Cancel',
@@ -77,16 +109,26 @@ class RatingForm extends Component {
             );
         })
         .catch( err => {
-            //console.log("postRatingFilm err: ", err);
-            Alert.alert(
-                'Error',
-                'No ha sido posible valorar la película en TMDB',
-                [
-                    {text: 'Aceptar', onPress: () => {} },
-                ],
-                {cancelable: false},
-            );
+            //console.log("_sendRatingFilm err: ", err);
+            if (err.message.includes("401") && this.state.attempts <= 1) {
+                const newAttempt = this.state.attempts + 1;
+                this.setState({attempts: newAttempt})
+                this._requestGuestSession(rating);
+            } else {
+                this._errorMessage();
+            }
         });
+    }
+
+    _errorMessage = () => {
+        Alert.alert(
+            'Error',
+            'Ha ocurrido un error durante la solicitud. Por favot, inténtelo más tarde.',
+            [
+                {text: 'Aceptar', onPress: () => {} },
+            ],
+            {cancelable: false},
+        );
     }
 }
 
