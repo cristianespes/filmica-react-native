@@ -51,7 +51,7 @@ class RatingForm extends Component {
             return
         }
 
-        if (rating < 0.5 || rating > 10.0) {
+        if (rating.replace(",",".") < 0.5 || rating.replace(",",".") > 10.0) {
             const ratingError = "Valor fuera del rango de valoración";
             this.setState({ ratingError });
             return
@@ -59,7 +59,7 @@ class RatingForm extends Component {
         
         this.setState({ ratingError: '' });
 
-        api.postRatingFilm(this.props.film.id, { "value": parseFloat(rating).toFixed(1) })
+        api.postRatingFilm(this.props.film.id, { "value": parseFloat(rating.replace(",",".")).toFixed(1) })
         .then( res => {
             //console.log('postRatingFilm res: ', res)
             Alert.alert(
