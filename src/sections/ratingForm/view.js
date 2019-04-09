@@ -25,7 +25,7 @@ class RatingForm extends Component {
                             error={this.state.ratingError}
                             keyboardType={'decimal-pad'}
                         />
-                        <Text style={styles.label}>El valor introducido debe estar comprendido entre 0.5 y 10</Text>
+                        <Text style={styles.label}>{'La valoración debe ser un valor comprendido entre 1 y 10'}</Text>
                     </View>
 
                     <Button
@@ -47,14 +47,14 @@ class RatingForm extends Component {
             return
         }
 
-        if (!parseFloat(rating)) {
+        if (!parseFloat(rating.replace(",","."))) {
             const ratingError = "Debe introducir un valor númerico";
             this.setState({ ratingError });
             return
         }
 
-        if (rating.replace(",",".") < 0.5 || rating.replace(",",".") > 10.0) {
-            const ratingError = "Valor fuera del rango de valoración";
+        if (rating.replace(",",".") < 1 || rating.replace(",",".") > 10) {
+            const ratingError = "Valor fuera del rango permitido";
             this.setState({ ratingError });
             return
         }
@@ -62,8 +62,9 @@ class RatingForm extends Component {
         this.setState({ ratingError: '' });
 
         try {
-            const guestSession = await AsyncStorage.getItem(GUEST_SESSION_ID)
-            const ratingFloat = parseFloat(rating.replace(",",".")).toFixed(1);
+            const guestSession = await AsyncStorage.getItem(GUEST_SESSION_ID);
+            const ratingFloat = parseFloat(rating);
+            //console.log("ratingFloat: ", ratingFloat)
             
             if (guestSession !== null) {
                 this._sendRatingFilm(this.props.film.id, ratingFloat, guestSession)
@@ -71,7 +72,8 @@ class RatingForm extends Component {
                 this._requestGuestSession(ratingFloat);
             }
         } catch(e) {
-            console.log("error: ", e);
+            //console.log("error: ", e);
+            this._errorMessage();
         }
     }
 
@@ -98,11 +100,6 @@ class RatingForm extends Component {
                 'Calificación enviada',
                 '¡Gracias por enviarnos su valoración!',
                 [
-                    {
-                    text: 'Cancel',
-                    onPress: () => {},
-                    style: 'cancel',
-                    },
                     {text: 'Aceptar', onPress: () => Actions.pop()},
                 ],
                 {cancelable: false},
@@ -123,7 +120,7 @@ class RatingForm extends Component {
     _errorMessage = () => {
         Alert.alert(
             'Error',
-            'Ha ocurrido un error durante la solicitud. Por favot, inténtelo más tarde.',
+            'Ha ocurrido un error durante la solicitud. Por favor, inténtelo más tarde.',
             [
                 {text: 'Aceptar', onPress: () => {} },
             ],
